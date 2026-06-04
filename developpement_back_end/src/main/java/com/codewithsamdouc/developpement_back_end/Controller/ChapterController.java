@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/chapters")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ChapterController {
 
     final ChapterService chapterService;

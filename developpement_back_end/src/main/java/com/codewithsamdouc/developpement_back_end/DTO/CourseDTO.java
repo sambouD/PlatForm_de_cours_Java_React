@@ -16,6 +16,9 @@ public class CourseDTO {
 
     Long userId;
 
+    String userName;
+
+
 
     public Long getId() {
         return id;
@@ -57,6 +60,14 @@ public class CourseDTO {
         this.userId = userId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public CourseDTO() {
     }
 
@@ -66,5 +77,13 @@ public class CourseDTO {
         this.description = description;
         this.createdAt = createdAt;
         this.userId = userId;
+    }
+
+    public CourseDTO(Long id, String title, String description, LocalDate createdAt, String userName) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.createdAt = createdAt;
+        this.userName = userName;
     }
 }
