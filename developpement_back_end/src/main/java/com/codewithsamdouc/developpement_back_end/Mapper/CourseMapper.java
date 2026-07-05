@@ -13,7 +13,8 @@ public class CourseMapper {
                 course.getTitle(),
                 course.getDescription(),
                 course.getCreatedAt(),
-                course.getUser().getLastName()+ " " + course.getUser().getFirstName() // Avoir le nom et prenom de la personne au liée d'avoir son id
+                course.getUser() != null ? course.getUser().getId() : null,
+                course.getUser() != null ? course.getUser().getLastName()+ " " + course.getUser().getFirstName() : null// Avoir le nom et prenom de la personne au liée d'avoir son id
 
         );
 

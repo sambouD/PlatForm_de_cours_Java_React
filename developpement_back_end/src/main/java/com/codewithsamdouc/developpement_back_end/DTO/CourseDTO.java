@@ -79,11 +79,13 @@ public class CourseDTO {
         this.userId = userId;
     }
 
-    public CourseDTO(Long id, String title, String description, LocalDate createdAt, String userName) {
+
+    public CourseDTO(Long id, String title, String description, LocalDate createdAt, Long userId, String userName) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.createdAt = createdAt;
+        this.userId = userId;
         this.userName = userName;
     }
 }

@@ -14,6 +14,10 @@ public class EnrollmentDTO {
     Long courseId;
 
 
+    String userName;
+
+    String courseTitle;
+
     public Long getId() {
         return id;
     }
@@ -46,18 +50,31 @@ public class EnrollmentDTO {
         this.courseId = courseId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getCourseTitle() {
+        return courseTitle;
+    }
+
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
+    }
+
     public EnrollmentDTO() {
     }
 
-    public EnrollmentDTO(Long id, LocalDate enrolledAt, Long userId, Long courseId) {
+    public EnrollmentDTO(Long id, LocalDate enrolledAt, Long userId, String userName, Long courseId, String courseTitle) {
         this.id = id;
         this.enrolledAt = enrolledAt;
         this.userId = userId;
         this.courseId = courseId;
+        this.userName = userName;
+        this.courseTitle = courseTitle;
     }
-
-
-
-
-
 }

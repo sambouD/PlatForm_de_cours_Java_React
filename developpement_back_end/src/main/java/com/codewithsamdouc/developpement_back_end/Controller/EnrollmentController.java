@@ -39,7 +39,7 @@ public class EnrollmentController {
     /**
      * Quels cours est-ce que cet étudiant a rejoint ?
      */
-    @GetMapping("/{studentId}")
+    @GetMapping("/student/{studentId}")
     public ResponseEntity<List<EnrollmentDTO>> getEnrollmentsByStudent (@PathVariable Long studentId){
 
         return new ResponseEntity<>(enrollmentService.getEnrollmentsByStudent(studentId), HttpStatus.OK);
@@ -48,7 +48,7 @@ public class EnrollmentController {
     /**
      * Quels étudiants sont inscrits à ce cours ?
      */
-    @GetMapping("/{courseId}")
+    @GetMapping("/course/{courseId}")
     public ResponseEntity<List<EnrollmentDTO>> getEnrollmentsByCourse(@PathVariable Long courseId){
         return  new ResponseEntity<>(enrollmentService.getEnrollmentsByCourse(courseId), HttpStatus.OK);
     }

@@ -6,6 +6,7 @@ import com.codewithsamdouc.developpement_back_end.Entity.ChapterEntity;
 import com.codewithsamdouc.developpement_back_end.Entity.CourseEntity;
 import com.codewithsamdouc.developpement_back_end.Mapper.ChapterMapper;
 import com.codewithsamdouc.developpement_back_end.Repository.ChapterRepository;
+import com.codewithsamdouc.developpement_back_end.Repository.CourseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,12 +20,16 @@ public class ChapterService {
 
     final CourseService courseService;
 
+    final CourseRepository courseRepository;
+
     public ChapterService(ChapterRepository chapterRepository,
                           ChapterMapper chapterMapper,
-                          CourseService courseService) {
+                          CourseService courseService,
+                          CourseRepository courseRepository) {
         this.chapterRepository = chapterRepository;
         this.chapterMapper = chapterMapper;
         this.courseService = courseService;
+        this.courseRepository = courseRepository;
     }
 
 
@@ -82,10 +87,15 @@ public class ChapterService {
      * @param chapterDetails
      * @return
      */
-    public ChapterDTO updateChapter(Long id, ChapterEntity chapterDetails){
+    public ChapterDTO updateChapter(Long id, ChapterDTO chapterDetails){
         ChapterEntity chapter = chapterRepository.findById(id).orElseThrow(() -> new NotFoundExeception("Chapter not found"));
         chapter.setTitle(chapterDetails.getTitle());
         chapter.setContent(chapterDetails.getContent());
+
+        CourseEntity courseTitre = courseRepository.findById(chapterDetails.getCourseId())
+                .orElseThrow(() -> new NotFoundExeception("Course Not found"));
+
+        chapter.setCourse(courseTitre);
 
         ChapterEntity saveCourse = chapterRepository.save(chapter);
 

@@ -11,8 +11,12 @@ public class EnrollmentMapper {
         return new EnrollmentDTO(
                 enrollment.getId(),
                 enrollment.getEnrolledAt(),
-                enrollment.getUser().getId(),
-                enrollment.getCourse().getId()
+                enrollment.getUser() != null ? enrollment.getUser().getId() : null,
+                enrollment.getUser() != null ? enrollment.getUser().getFirstName() + " " + enrollment.getUser().getLastName() : null,
+                enrollment.getCourse() != null ? enrollment.getCourse().getId() : null,
+                enrollment.getCourse() != null ? enrollment.getCourse().getTitle() : null
+
+
         );
     }
 

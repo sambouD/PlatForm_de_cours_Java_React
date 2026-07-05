@@ -1,4 +1,3 @@
-
 import api from "./api";
 
 export const getAllChapters = () => api.get('/chapters') 

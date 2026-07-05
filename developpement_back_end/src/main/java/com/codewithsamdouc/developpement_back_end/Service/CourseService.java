@@ -7,6 +7,7 @@ import com.codewithsamdouc.developpement_back_end.Entity.CourseEntity;
 import com.codewithsamdouc.developpement_back_end.Entity.UserEntity;
 import com.codewithsamdouc.developpement_back_end.Mapper.CourseMapper;
 import com.codewithsamdouc.developpement_back_end.Repository.CourseRepository;
+import com.codewithsamdouc.developpement_back_end.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,11 +23,14 @@ public class CourseService {
 
     final UserService userService;
 
+    final UserRepository userRepository;
 
-    public CourseService(CourseRepository courseRepository, CourseMapper courseMapper, UserService userService) {
+    public CourseService(CourseRepository courseRepository, CourseMapper courseMapper,
+                         UserService userService,  UserRepository userRepository) {
         this.courseRepository = courseRepository;
         this.courseMapper = courseMapper;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
 
@@ -83,11 +87,16 @@ public class CourseService {
      * @param courseDetails
      * @return
      */
-    public CourseDTO updateCourse(Long id, CourseEntity courseDetails){
+    public CourseDTO updateCourse(Long id, CourseDTO courseDetails){
         CourseEntity course = courseRepository.findById(id).orElseThrow(() -> new NotFoundExeception("Course Not found"));
         course.setTitle(courseDetails.getTitle());
         course.setDescription(courseDetails.getDescription());
         course.setCreatedAt(courseDetails.getCreatedAt());
+
+        UserEntity instructor = userRepository.findById(courseDetails.getUserId())
+                .orElseThrow(() -> new NotFoundExeception("User Not found"));
+
+        course.setUser(instructor);
 
         CourseEntity saveCourse = courseRepository.save(course);
 

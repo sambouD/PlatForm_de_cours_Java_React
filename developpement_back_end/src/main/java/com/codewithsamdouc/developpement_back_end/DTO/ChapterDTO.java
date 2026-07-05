@@ -12,6 +12,8 @@ public class ChapterDTO {
 
     Long courseId;
 
+    String courseTitle;
+
 
     public Long getId() {
         return id;
@@ -53,16 +55,24 @@ public class ChapterDTO {
         this.courseId = courseId;
     }
 
+    public String getCourseTitle() {
+        return courseTitle;
+    }
+
+    public void setCourseTitle(String courseTitle) {
+        this.courseTitle = courseTitle;
+    }
 
     public ChapterDTO() {
     }
 
-    public ChapterDTO(Long id, String title, String content, int orderIndex, Long courseId) {
+    public ChapterDTO(Long id, String title, String content, int orderIndex, Long courseId, String courseTitle) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.orderIndex = orderIndex;
         this.courseId = courseId;
+        this.courseTitle = courseTitle;
     }
 
 

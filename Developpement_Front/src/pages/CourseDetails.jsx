@@ -2,11 +2,13 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getCourseById } from "../services/coursesService";
 import { Link } from "react-router-dom"
+import { getEnrollmentsByCourse } from "../services/enrollments";
 
 
 
 const CourseDetails = () => {
     const [course, setCourses] = useState(null)
+    const [enrollments, setEnrollments] = useState([])
 
     const { id } = useParams();
 
@@ -17,6 +19,12 @@ const CourseDetails = () => {
         console.log('Erreur:', err)
     })
     }, []);
+
+    useEffect(() => {
+        getEnrollmentsByCourse(id).then(response => {
+            setEnrollments(response.data)
+        })
+    }, [])
     
 if (!course) return <p className="text-center mt-10">Chargement...</p>
 return (
@@ -39,13 +47,22 @@ return (
                     <p className="text-gray-500 text-sm">Professeur</p>
                     <p className="text-gray-800 font-medium">{course.userName}</p>
                 </div>
+                <div>
+                    <p className="text-gray-500 text-sm">Etudiants inscrits à ce cours</p>
+                    {enrollments.map(enrollment => (
+                        <div key={enrollment.id}>
+                            <p className="text-gray-800 font-medium">{enrollment.userName}</p>
+                        </div>
+                    ))}
+                
+                </div>
             </div>
-        </div>
         <div className="flex gap-3 mt-6">
-            <Link to="/courses" className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+            <Link to={`/courses/${course.id}/edit`} className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                 Modifier
             </Link>
 
+        </div>
         </div>
     </div>
 

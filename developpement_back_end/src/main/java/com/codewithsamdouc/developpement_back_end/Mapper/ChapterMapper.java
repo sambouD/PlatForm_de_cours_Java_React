@@ -14,7 +14,8 @@ public class ChapterMapper {
             chapterEntity.getTitle(),
             chapterEntity.getContent(),
             chapterEntity.getOrderIndex(),
-            chapterEntity.getCourse().getId()
+            chapterEntity.getCourse() != null ? chapterEntity.getCourse().getId() : null,
+            chapterEntity.getCourse() != null ? chapterEntity.getCourse().getTitle() : null
         );
     }
 
